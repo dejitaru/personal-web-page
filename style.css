@@ -1,0 +1,44 @@
+body{font-family: 'Roboto', sans-serif;background:#F3F3F3; letter-spacing: .1em}
+.bold{font-weight: 800;}
+.title{font-size: 1.875rem;}
+.subtitle { font-size:1.5rem;}
+nav#main ul{
+    font-size:13px;
+    font-weight: 600px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin:0; padding: 0;
+
+}
+nav#main a{
+  color:#8795a1;
+  text-decoration: none;
+}
+nav#main a:hover{
+  color: #000;
+  font-weight: 600;
+}
+nav#main a.selected{
+  color: #000;
+  font-weight: 600;
+}
+li{ margin-right:20px}
+p{font-size: 1rem; line-height: 1.5rem;}
+.carlos{
+    width:100%;
+    border-radius: 5px;
+    border:1px solid #5f5b5b;
+    padding:4px
+}
+.content a { color:#000; font-weight: bold;}
+.content a:hover {
+
+}
+.content p {margin-bottom:30px; font-size:1.1rem}
+
+/*blog*/
+.entry{margin-bottom:16px}
+.entry-title{font-size:0.75rem}
+.entry a{text-decoration: none;}
+.entry a:hover{ text-decoration: underline;}
