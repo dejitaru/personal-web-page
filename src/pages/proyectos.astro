@@ -1,0 +1,27 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+import Menu from '../components/Menu.astro';
+---
+
+<Layout>
+    <div class="container">
+        <div class="row">
+            <Menu currentPath="/proyectos"/>
+            <main>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 col-md-7 content">
+                        <h4 class="bold text-3">BOOKNREADY(2024)</h4>
+                        <p>Es una plataforma para administración de clases de pilates que incluye compra de planes, inscripción y cancelación de clases. Escríbeme si quieres ver un demo.</p>
+                        <h4 class="bold text-3">LMSREADY(2020)</h4>
+                        <p>Es un LMS(Learning managment system) pensando para las empresas donde involucra a recursos humanos, personal, departamente de sistemas y administradores. Ha sido usado por más de 6000 personas y es un proyecto activo. Escríbeme si quieres ver un demo.</p>
+                        <h3 class="bold">Desarrollo</h3>
+                        <p>Trabajé durante 11 años(2010-2022) en el área de recursos humanos creando software para seguimiento de la capacitación de personal entre otras herramientas, durante este tiempo también he llevado más de 200 proyectos freelance en <a href="https://gestudios.com">gestudios.com</a></p>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</Layout>

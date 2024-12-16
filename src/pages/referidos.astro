@@ -1,0 +1,60 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+import Menu from '../components/Menu.astro';
+---
+
+<Layout>
+    <div class="container">
+        <div class="row">
+            <Menu currentPath="/"/>
+            <main>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 col-md-7 content">
+                        <h3 class="bold">Referidos</h3>
+                        <table class="table table-sm table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Servicio</th>
+                                    <th>Enlace</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td nowrap>Digital Ocean</td>
+                                    <td>https://m.do.co/c/adf31a6f6d4d</td>
+                                </tr>
+                                <tr>
+                                    <td>Bitso</td>
+                                    <td>https://bitso.com/register?ref=qskjv</td>
+                                </tr>
+                                <tr>
+                                    <td>Binance</td>
+                                    <td>https://www.binance.com/en/activity/referral-entry/JLMBX</td>
+                                </tr>
+                                <tr>
+                                    <td>A2hosting</td>
+                                    <td>http://www.a2hosting.com/refer/152757</td>
+                                </tr>
+                                <tr>
+                                    <td>Name.com</td>
+                                    <td>https://www.name.com/referral/10bcbd</td>
+                                </tr>
+                                <tr>
+                                    <td>Fintual</td>
+                                    <td>https://fintual.mx/r/carlosg16f</td>
+                                </tr>
+                                <!--tr>
+                                    <td>Binance</td>
+                                    <td>https://m.do.co/c/adf31a6f6d4d</td>
+                                </tr-->
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</Layout>

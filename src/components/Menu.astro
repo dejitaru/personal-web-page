@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import carlosProfileImage from '../assets/carlos.jpg';
+
+const { currentPath } = Astro.props;
+const menuItems = [
+  { href: '/', label: 'QUIEN' },
+  { href: '/clases', label: 'CLASES' },
+  { href: '/proyectos', label: 'PROYECTOS' },
+  { href: '/faqs', label: 'FAQS' },
+  { href: '/blog', label: 'BLOG' }
+
+];
+---
+<header>
+    <div class="row my-5">
+        <div class="col-2 col-md-1">
+            <Image src={carlosProfileImage} class="carlos" alt="Carlos" />
+        </div>
+        <div class="col-10">
+            <h2 class="bold title">Carlos Miguel Guevara</h2>
+            <nav id="main">
+                <ul>
+                 {menuItems.map((item) => (
+                    <li>
+                        <a
+                        href={item.href}
+                        class:list={[
+                            'menu-link',
+                            { 'active': currentPath === item.href }
+                        ]}
+                        >
+                        {item.label}
+                        </a>
+                    </li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<style>
+.carlos{
+    width:100%;
+    height:80px;
+    border-radius: 5px;
+    border:1px solid #5f5b5b;
+    padding:4px
+}
+nav#main ul{
+    font-size:13px;
+    font-weight: 600px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin:0; padding: 0;
+
+}
+nav#main a{
+  color:#8795a1;
+  text-decoration: none;
+}
+nav#main a:hover{
+  color: #000;
+  font-weight: 600;
+}
+nav#main a.active{
+  color: #000;
+  font-weight: 600;
+}
+li{ margin-right:20px}
+</style>

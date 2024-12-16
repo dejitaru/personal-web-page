@@ -1,0 +1,26 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+import Menu from '../components/Menu.astro';
+---
+
+<Layout>
+    <div class="container">
+        <div class="row">
+            <Menu currentPath="/blog"/>
+            <main>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10 col-md-7 content">
+                    <h3 class="bold">BLOG</h3>
+                    <p>Pronto estrenaré esta sección 👨🏼‍💻.</p>
+                    <!--div class="entry">
+                        <span class="entry-title d-block">8 FEBRERO, 2022</span>
+                        <a href="">Nuevo sitio web personal</a>
+                    </div-->
+                </div>
+            </div>
+        </main>
+        </div>
+    </div>
+</Layout>

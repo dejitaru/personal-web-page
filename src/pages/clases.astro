@@ -1,0 +1,25 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+import Menu from '../components/Menu.astro';
+---
+
+<Layout>
+    <div class="container">
+        <div class="row">
+            <Menu currentPath="/clases"/>
+            <main>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 col-md-7 content">
+                        <h3 class="bold">Clases</h3>
+                        <p>Al ser autodidacta he visto muchos cursos y sé lo que es estar bloqueado en un tema deseando que alguien me ayudara. Esto fue la razón principal para empezar a dar clases y asesorias.</p>
+                        <p>Durante 5 años impartí clases de php, javascript, html y css en la Universidad Interamericada para el Desarrollo y completé una maestría en educación. </p>
+                        <p>Me puedes encontrar en <a href="https://www.codementor.io/@dejitaru">arc.dev</a> para temas profesionales, en <a href="https://www.superprof.mx/clases-practicas-php-javascript-html-css-excel-aprendiendo-desde-primer-dia.html">Superprof</a> ó <a href="https://www.tusclases.mx/profesores/carlos-guevara2209993/opiniones">Tusclases</a> para temas escolares o personales</p>
+                        <p>Si quieres aprender sobre criptomonedas o mejorar tus finanzas personales, búscame en  <a href="https://www.superprof.mx/bitcoin-mundo-cripto-desde-cero-enseno-las-bases-para-saber-por-donde-empezar.html">superprof</a> </p>
+                </div>
+            </div>
+        </main>
+        </div>
+    </div>
+</Layout>

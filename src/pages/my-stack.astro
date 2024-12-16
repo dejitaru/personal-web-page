@@ -1,0 +1,59 @@
+---
+import Welcome from '../components/Welcome.astro';
+import Layout from '../layouts/Layout.astro';
+import Menu from '../components/Menu.astro';
+---
+
+<Layout>
+    <div class="container">
+        <div class="row">
+            <Menu currentPath="/"/>
+            <main>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 col-md-7 content">
+                        <h3 class="bold">My stack</h3>
+                        <p>Estas son las herramientas que uso para hacer mi trabajo. Soy fan from hell de las herramentas para seguimiento de tareas y de mejorar las herramientas que uso. </p>
+                        <h4 class="bold text-3">Desk setup</h4>
+                        <ul>
+                            <li>Macbok pro M2 2022</li>
+                            <li>2 monitores Samsung de 24' a una resolución de 2560 x 1440 </li>
+                            <li>Soporte Vivo para dos monitores en arreglo vertical</li>
+                            <li>Webcam logitech c920</li>
+                            <li>Silla Bayside Furnishings con un upgrade de llantas para patines de 10mm</li>
+                            <li>Teclado wireless logitech Mx Keys mini</li>
+                            <li>Mouse lotitech Mx master 3</li>
+                            <li>Bocina logitech Z333</li>
+                            <li>Audífonos sony WH1000XM3/B </li>
+                            <li>Magic trackpad recargable</li>
+                        </ul>
+                        <h4 class="bold text-3">Development</h4>
+                        <ul>
+                            <li>PhpStorm</li>
+                            <li>Vs Code</li>
+                            <li>Chrome</li>
+                            <li>TablePlus</li>
+                            <li>iTerm2</li>
+                            <li>Bitbucket</li>
+                        </ul>
+                        <h4 class="bold text-3">Other apps</h4>
+                        <ul>
+                            <li>Sublime text 3. I use it mostly as a text editor</li>
+                            <li>Trello</li>
+                            <li>Slack</li>
+                            <li>Airmail</li>
+                            <li>Sketch app</li>
+                            <li>Transmit</li>
+                            <li>GitFTP-deploy</li>
+                            <li>Betterdisplay</li>
+                            <li>Sidekick (for telegram & whatsapp)</li>
+                            <li>Coin tick (for crypto coins)</li>
+                            <li>Affinity designer</li>
+                            <li>Wireguard</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</Layout>
