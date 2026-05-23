@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import carlosProfileImage from '../assets/carlos.jpg';
+import carlosHoverImage from '../assets/carlos-hover.jpg';
 
 const { currentPath } = Astro.props;
 const menuItems = [
   { href: '/', label: 'QUIEN' },
-  { href: '/clases', label: 'CLASES' },
   { href: '/proyectos', label: 'PROYECTOS' },
-  { href: '/faqs', label: 'FAQS' },
+  { href: '/clases', label: 'CLASES' },
   { href: '/blog', label: 'BLOG' }
 
 ];
@@ -15,7 +15,10 @@ const menuItems = [
 <header>
     <div class="row my-5">
         <div class="col-2 col-md-1">
-            <Image src={carlosProfileImage} class="carlos" alt="Carlos" />
+            <div class="carlos-wrapper">
+                <Image src={carlosProfileImage} class="carlos carlos-default" alt="Carlos" />
+                <Image src={carlosHoverImage} class="carlos carlos-hover" alt="Carlos" />
+            </div>
         </div>
         <div class="col-10">
             <h2 class="bold title">Carlos Miguel Guevara</h2>
@@ -40,13 +43,24 @@ const menuItems = [
     </div>
 </header>
 <style>
-.carlos{
-    width:100%;
-    height:80px;
-    border-radius: 5px;
-    border:1px solid #5f5b5b;
-    padding:4px
+.carlos-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
+.carlos{
+    position: absolute;
+    width:80px;
+    height:80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border:1px solid #e7e7e7;
+    padding:4px;
+    transition: opacity 0.3s ease;
+}
+.carlos-hover { opacity: 0; }
+.carlos-wrapper:hover .carlos-default { opacity: 0; }
+.carlos-wrapper:hover .carlos-hover { opacity: 1; }
 nav#main ul{
     font-size:13px;
     font-weight: 600px;

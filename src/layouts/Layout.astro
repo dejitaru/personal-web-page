@@ -24,7 +24,36 @@ const { title, description } = Astro.props;
         </script>
     </head>
 	<body>
-		<slot />
+		<div class="page-content">
+			<slot />
+		</div>
+		<footer>hecho con <span class="flap-word">amor</span>, <span class="flap-word">café</span> y <span class="flap-word">claude</span></footer>
+
+		<script>
+			const pool = ['amor', 'café', 'claude', 'lágrimas', 'cerveza', 'fé', 'código', 'codex', 'magia'];
+			const spans = Array.from(document.querySelectorAll<HTMLElement>('.flap-word'));
+			const current = spans.map(s => s.textContent!);
+			let turn = 0;
+
+			function flipWord(el: HTMLElement, newWord: string) {
+				el.style.transition = 'transform 0.1s ease-in';
+				el.style.transform = 'perspective(200px) rotateX(-90deg)';
+				setTimeout(() => {
+					el.textContent = newWord;
+					el.style.transition = 'transform 0.15s ease-out';
+					el.style.transform = 'perspective(200px) rotateX(0deg)';
+				}, 110);
+			}
+
+			setInterval(() => {
+				const pos = turn % 3;
+				turn++;
+				const available = pool.filter(w => !current.includes(w));
+				const newWord = available[Math.floor(Math.random() * available.length)];
+				current[pos] = newWord;
+				flipWord(spans[pos], newWord);
+			}, 2000);
+		</script>
 	</body>
 </html>
 
@@ -34,6 +63,12 @@ body{
     letter-spacing: .1em;
     background-image: url(../assets/background.svg);
     background-repeat: repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.page-content {
+    flex: 1;
 }
 .bold{font-weight: 800;}
 .title{font-size: 1.875rem;}
@@ -42,6 +77,16 @@ body{
 p{font-size: 1rem; line-height: 1.5rem;}
 .content a { color:#000; font-weight: bold;}
 .content p {margin-bottom:30px; font-size:1.1rem}
+
+footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #8795a1;
+    padding: 2rem 0 1rem;
+}
+.flap-word {
+    display: inline-block;
+}
 
 /*blog*/
 .entry{margin-bottom:16px}
