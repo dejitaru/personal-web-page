@@ -1,0 +1,47 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+import home from '../../assets/casos/booknready/booknready-home.png';
+import calendar from '../../assets/casos/booknready/booknready-calendar.png';
+import profile from '../../assets/casos/booknready/booknready-profile.png';
+---
+<CaseStudy
+  kicker="CASO DE ESTUDIO · 2022 — HOY"
+  title="BooknReady: reservas y cobros para estudios boutique"
+  lead="Un SaaS para estudios de pilates, barre y fitness boutique: sus clientes reservan clase, compran paquetes y se anotan en lista de espera; el estudio controla cupos, asistencia, maestros y ventas. Un solo código que hoy opera varias marcas."
+  facts={[
+    { k: 'Rol', v: 'Fundador · producto + desarrollo' },
+    { k: 'Stack', v: 'PHP 8 · CodeIgniter 3 · MySQL · Vue · Stripe' },
+    { k: 'Alcance', v: 'Multi-marca · 3 roles · 22 dominios' },
+  ]}
+  problem="Los estudios boutique viven del cupo: una clase de reformer tiene pocos lugares y cada lugar vacío es dinero perdido. Reservar por WhatsApp, cobrar paquetes a mano y llevar la lista de espera en una libreta genera <b>sobrecupo</b>, <b>clases medio vacías</b> y <b>créditos que nadie sabe si se usaron</b>."
+  approach={[
+    { t: 'Un producto, muchas marcas', d: 'Cada estudio tiene su propia identidad visual y correos, pero todos corren sobre el mismo código. El tema se elige por configuración y cada cliente se despliega por separado.' },
+    { t: 'El cupo como centro del modelo', d: 'Clases, horarios, salas, reservas, cancelaciones y <b>lista de espera</b> giran alrededor de un mismo dato: cuántos lugares quedan. Así no hay sobrecupo y los lugares liberados se vuelven a ocupar.' },
+    { t: 'Cobrar sin tocar tarjetas', d: 'Paquetes y planes se cobran con Stripe; el sistema solo administra créditos, órdenes y ventas mensuales. Menos riesgo, menos cumplimiento normativo, más foco en el producto.' },
+    { t: 'Tres experiencias, tres roles', d: 'Admin opera el negocio, cliente reserva desde su portal y maestro gestiona su clase y asistencia. Cada flujo se diseñó para su usuario, con permisos por rol.' },
+  ]}
+  slides={[
+    { src: home, alt: 'Home del cliente en BooknReady', caption: 'Home del cliente: próximas clases y paquete activo.' },
+    { src: calendar, alt: 'Calendario de clases de BooknReady', caption: 'Calendario: reservar es ver un lugar libre y tocarlo.' },
+    { src: profile, alt: 'Perfil del cliente en BooknReady', caption: 'Perfil: historial, créditos y datos de cuenta.' },
+    { alt: 'Espacio reservado — p. ej. vista del admin o del maestro' },
+  ]}
+  decisions={[
+    { y: 'Inicio', t: 'Multi-marca desde el día uno', d: 'En vez de un sistema a la medida por estudio, un núcleo común con temas por marca.', trade: 'Menos personalización por cliente, pero un solo producto que mantener y mejorar.' },
+    { y: 'Pagos', t: 'Stripe para paquetes y planes', d: 'Compra de paquetes de clases y planes con cobro en línea; el sistema solo lleva créditos y órdenes.', trade: 'Dependencia de un proveedor a cambio de no manejar datos de tarjeta.' },
+    { y: 'Ocupación', t: 'Lista de espera automática', d: 'Cuando alguien cancela, el lugar se ofrece a quien espera, con notificación por correo.', trade: 'Más reglas de negocio, pero clases más llenas sin trabajo manual.' },
+    { y: 'Arquitectura', t: 'De modelos a servicios de dominio', d: 'Se retiraron los modelos CI3: 22 dominios de servicios con dependencias inyectadas, migraciones Phinx y tests PHPUnit + Playwright.', trade: 'Refactor gradual mientras los estudios seguían operando.' },
+    { y: '2026', t: 'Experiencia y operación', d: 'Rediseño del home y la reserva del cliente, bitácora de actividad única y despliegue por cliente con Deployer.', trade: 'Se priorizó la experiencia de reserva y la trazabilidad sobre features nuevas.' },
+    { y: 'Siguiente', t: 'Suscripción del propio SaaS', d: 'Planes y facturas para que cada estudio pague BooknReady desde la misma plataforma.', trade: 'Convertir un proyecto a la medida en un producto que se vende solo.' },
+  ]}
+  outcomes={[
+    'Reservas, cancelaciones y <b>lista de espera</b> sin intervención del estudio.',
+    'Venta de paquetes y planes en línea con Stripe.',
+    'Asistencia y gestión de clases desde el portal del maestro.',
+    'Reportes de ventas mensuales y bitácora de actividad para el admin.',
+    'Nuevas marcas se suman con un tema y un despliegue, no con un proyecto nuevo.',
+  ]}
+  quote="“Cada lugar vacío en una clase es dinero que no vuelve.”"
+  cta="¿Tu negocio vive de agendas, cupos o reservas?"
+  subject="Caso BooknReady"
+/>

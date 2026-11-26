@@ -1,7 +1,22 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Menu from '../components/Menu.astro';
+import booknreadyCover from '../assets/casos/booknready/booknready-home.png';
+import lmsreadyCover from '../assets/casos/lmsready/lmsready-mockup.png';
+
+// cover: imagen importada de src/assets (sin cover = espacio reservado)
+// href: caso de estudio (sin href = la tarjeta no es enlace)
+const projects = [
+  { name: 'BOOKNREADY', year: '2024', status: 'activo', cover: booknreadyCover, href: '/casos/booknready',
+    desc: 'Plataforma para administración de clases de pilates que incluye compra de planes, inscripción y cancelación de clases.' },
+  { name: 'IAP INTRANET', year: '2020', status: 'activo', href: '/casos/iap-v1',
+    desc: 'Sistema de gestión académica y financiera de un instituto: alumnos, grupos, asistencias, pagos y nómina.' },
+  { name: 'BLOGNREADY', year: '2025', status: 'activo', href: '/casos/blognready',
+    desc: 'CMS rápido usado como alternativa al pesado Wordpress. 10 clientes lo usan, teniendo el más grande 15,000 visitas al dia.' },
+  { name: 'LMSREADY', year: '2020', status: 'activo', cover: lmsreadyCover, href: '/casos/lmsready',
+    desc: 'LMS (Learning management system) pensado para empresas, donde involucra a recursos humanos, personal, departamento de sistemas y administradores. Usado por más de 6000 personas.' },
+];
 ---
 
 <Layout>
@@ -10,14 +25,29 @@ import Menu from '../components/Menu.astro';
             <Menu currentPath="/proyectos"/>
             <main>
                 <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10 col-md-7 content">
-                        <h4 class="bold text-3">BLOGNREADY | 2025 <span class="status-badge">activo</span></h4>
-                        <p>Es un CMS rápido usado como alternativa al pesado Wordpress. 10 clientes lo usan, teniendo el más grande 15,000 visitas al dia.</p>                        
-                        <h4 class="bold text-3">BOOKNREADY | 2024 <span class="status-badge">activo</span></h4>
-                        <p>Es una plataforma para administración de clases de pilates que incluye compra de planes, inscripción y cancelación de clases. Escríbeme si quieres ver un demo.</p>
-                        <h4 class="bold text-3">LMSREADY | 2020 <span class="status-badge">activo</span></h4>
-                        <p>Es un LMS(Learning managment system) pensando para las empresas donde involucra a recursos humanos, personal, departamente de sistemas y administradores. Ha sido usado por más de 6000 personas y es un proyecto activo. Escríbeme si quieres ver un demo.</p>
+                    <div class="d-none d-md-block col-md-1"></div>
+                    <div class="col-12 col-md-10 content">
+                        <div class="grid">
+                            {projects.map(p => {
+                                const Tag = p.href ? 'a' : 'div';
+                                return (
+                                <Tag class:list={['card-p', { link: p.href }]} href={p.href}>
+                                    <div class="cover">
+                                        {p.cover
+                                            ? <Image src={p.cover} alt={`Portada de ${p.name}`} widths={[480, 960]} sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 320px" />
+                                            : <div class="ph">{p.name}</div>}
+                                    </div>
+                                    <div class="body">
+                                        <h4 class="bold">{p.name} <span class="year">| {p.year}</span> <span class="status-badge">{p.status}</span></h4>
+                                        <p>{p.desc}</p>
+                                        {p.href
+                                            ? <span class="more">Ver caso de estudio →</span>
+                                            : <span class="more muted">Escríbeme si quieres ver un demo</span>}
+                                    </div>
+                                </Tag>
+                            );})}
+                        </div>
+                        <p class="mt-4"><a href="mailto:dejitaru@gmail.com?subject=Demo%20de%20proyecto">Contáctame</a> para ver un demo de cualquiera de ellos.</p>
                     </div>
                 </div>
             </main>
@@ -26,16 +56,20 @@ import Menu from '../components/Menu.astro';
 </Layout>
 
 <style>
-.status-badge {
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #4caf7d;
-    border: 1px solid #4caf7d;
-    border-radius: 20px;
-    padding: 2px 8px;
-    vertical-align: middle;
-    opacity: 0.8;
-}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card-p{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:5px;overflow:hidden;color:var(--fg)!important;font-weight:400!important;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.card-p.link:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.cover{aspect-ratio:16/10;background:var(--surface-2);border-bottom:1px solid var(--border);overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .4s ease}
+.card-p.link:hover .cover img{transform:scale(1.03)}
+.ph{height:100%;display:flex;align-items:center;justify-content:center;font-weight:100;font-size:1rem;color:var(--ph);letter-spacing:.2em}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.body h4{font-size:.85rem;margin-bottom:10px}
+.year{font-weight:300;color:#8795a1}
+.body p{font-size:.8rem!important;line-height:1.25rem;margin-bottom:16px!important;flex:1}
+.more{font-size:.75rem;font-weight:700}
+.more.muted{color:#8795a1;font-weight:400}
+.status-badge{font-size:.6rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#4caf7d;border:1px solid #4caf7d;border-radius:20px;padding:2px 8px;vertical-align:middle;opacity:.8}
+@media (max-width:991px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.grid{grid-template-columns:1fr;gap:16px}}
 </style>

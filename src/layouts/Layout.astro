@@ -14,6 +14,13 @@ const { title, description } = Astro.props;
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-N89MTNMP');</script>
+        <!-- End Google Tag Manager -->
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD2QESDRRX"></script>
         <script>
@@ -24,11 +31,23 @@ const { title, description } = Astro.props;
         </script>
     </head>
 	<body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N89MTNMP"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+		<div class="spotlight" aria-hidden="true"></div>
 		<div class="page-content">
 			<slot />
 		</div>
 		<footer>hecho con <span class="flap-word">amor</span>, <span class="flap-word">café</span> y <span class="flap-word">claude</span></footer>
 
+		<script>
+			const spot = document.querySelector<HTMLElement>('.spotlight')!;
+			window.addEventListener('pointermove', e => {
+				spot.style.setProperty('--x', e.clientX + 'px');
+				spot.style.setProperty('--y', e.clientY + 'px');
+			}, { passive: true });
+		</script>
 		<script>
 			const pool = ['amor', 'café', 'claude', 'lágrimas', 'cerveza', 'fé', 'código', 'codex', 'magia'];
 			const spans = Array.from(document.querySelectorAll<HTMLElement>('.flap-word'));
@@ -57,12 +76,35 @@ const { title, description } = Astro.props;
 	</body>
 </html>
 
+<style is:global>
+/* Paleta clara/oscura (oscuro = paco.me #1a1a1a), sigue la preferencia del sistema */
+:root{
+    color-scheme: light dark;
+    --bg:#fcfcfc; --text:#202020; --fg:#000; --surface:#fff; --surface-2:#fafafa;
+    --border:#e7e7e7; --muted:#555; --ph:#d0d5da;
+    --spot:rgba(29,78,216,.06);
+}
+/* Spotlight que sigue al cursor (estilo brittanychiang.com) */
+.spotlight{position:fixed;inset:0;z-index:0;pointer-events:none;transition:background .3s;
+    background:radial-gradient(600px at var(--x,50%) var(--y,30%), var(--spot), transparent 80%)}
+.page-content, footer{position:relative;z-index:1}
+@media (prefers-color-scheme: dark){
+    :root{
+        /* paleta slate estilo brittanychiang.com */
+        --bg:#0f172a; --text:#94a3b8; --fg:#e2e8f0; --surface:#1e293b; --surface-2:#1e293b;
+        --border:#334155; --muted:#94a3b8; --ph:#475569;
+        --spot:rgba(29,78,216,.15);
+    }
+    .carlos{ border-color: var(--border) !important; }
+}
+</style>
+
 <style>
 body{
     font-family: 'Roboto', sans-serif;
     letter-spacing: .1em;
-    background-image: url(../assets/background.svg);
-    background-repeat: repeat;
+    background: var(--bg); /* fondo liso estilo paco.me (antes: ../assets/background.svg) */
+    color: var(--text);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -75,7 +117,7 @@ body{
 .subtitle { font-size:1.5rem;}
 
 p{font-size: 1rem; line-height: 1.5rem;}
-.content a { color:#000; font-weight: bold;}
+.content a { color:var(--fg); font-weight: bold;}
 .content p {margin-bottom:30px; font-size:1.1rem}
 
 footer {

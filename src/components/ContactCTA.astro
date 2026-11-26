@@ -1,0 +1,10 @@
+---
+const { label = '¿Hablamos?' } = Astro.props;
+---
+<a class="contact-fab" href="mailto:dejitaru@gmail.com?subject=Vi%20tu%20caso%20de%20estudio">{label} →</a>
+<style>
+.contact-fab{position:fixed;right:24px;bottom:24px;background:var(--fg);color:var(--surface)!important;text-decoration:none;
+ padding:12px 20px;border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.1em;
+ box-shadow:0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease;z-index:50}
+.contact-fab:hover{transform:translateY(-2px)}
+</style>

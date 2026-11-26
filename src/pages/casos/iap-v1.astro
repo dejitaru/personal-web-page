@@ -1,0 +1,43 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+---
+<CaseStudy
+  kicker="CASO DE ESTUDIO · 2020 — HOY"
+  title="IAP Intranet: el sistema operativo de un instituto"
+  lead="Diseñé, construí y sigo evolucionando la plataforma con la que un instituto educativo gestiona alumnos, maestros, grupos, asistencias, pagos y nómina. Seis años, un solo producto, cero reescrituras desde cero."
+  facts={[
+    { k: 'Rol', v: 'Product owner + lead developer' },
+    { k: 'Stack', v: 'PHP 8.2 · CodeIgniter 3 · MySQL · Vue 3' },
+    { k: 'Alcance', v: '47 capacidades especificadas' },
+  ]}
+  slides={[
+    { alt: 'Espacio reservado — p. ej. dashboard principal' },
+    { alt: 'Espacio reservado — p. ej. estado de cuenta de un alumno' },
+    { alt: 'Espacio reservado — p. ej. tablero de asistencia / riesgo' },
+    { alt: 'Espacio reservado — p. ej. resumen de nómina' },
+  ]}
+  problem="El instituto operaba entre hojas de cálculo, recibos en papel y conversaciones de WhatsApp. Nadie podía responder rápido preguntas básicas del negocio: <b>¿quién debe?</b>, <b>¿qué alumno está por abandonar?</b>, <b>¿cuánto cuesta la nómina este mes?</b>"
+  approach={[
+    { t: 'Producto antes que código', d: 'Cada funcionalidad nace como una propuesta escrita (por qué, qué cambia, impacto) con las decisiones de negocio abiertas listadas explícitamente. Si el negocio no ha decidido, no se programa.' },
+    { t: 'Modelar el dominio real', d: 'Un usuario puede ser maestro y académico a la vez, y cobrar por ambos roles. Los descuentos pueden ser recurrentes. Las faltas generan riesgo de deserción. Ese tipo de reglas vive en servicios de dominio probados, no en controladores.' },
+    { t: 'Modernizar sin detener la operación', d: 'En lugar de reescribir, definí una migración por fases hacia API + frontend separado: primero controladores delgados, luego vistas que cargan por fetch, después limpieza del API. El instituto nunca dejó de operar.' },
+    { t: 'IA como parte del equipo', d: 'El repositorio incluye guías para agentes de código (Claude, Codex, Gemini), mapa de módulos y especificaciones vivas con OpenSpec, lo que me permite entregar más rápido sin perder calidad.' },
+  ]}
+  decisions={[
+    { y: 'Inicio', t: 'Lanzar rápido sobre lo conocido', d: 'CodeIgniter 3 + MySQL para tener operando alumnos, grupos y pagos en semanas, no meses.', trade: 'Velocidad hoy vs. deuda técnica mañana — aceptada conscientemente.' },
+    { y: 'Finanzas', t: 'Modelar el dinero como el negocio lo vive', d: 'Estados de cuenta, descuentos recurrentes, reembolsos, fondos y transacciones como capacidades separadas.', trade: 'Más entidades, pero cada regla es auditable y probada.' },
+    { y: 'Académico', t: 'De registrar asistencia a prevenir deserción', d: 'Tablero de asistencia y detección de riesgo: el dato operativo se vuelve alerta de retención.', trade: 'Se priorizó retención sobre nuevos reportes cosméticos.' },
+    { y: 'Arquitectura', t: 'Servicios de dominio, controladores delgados', d: '38 servicios PSR-4 con dependencias por constructor y tests unitarios aislados.', trade: 'Refactor gradual controlador por controlador, sin big-bang.' },
+    { y: '2026', t: 'Spec-driven + agentes de IA', d: 'OpenSpec (47 specs vivas) y AGENTS.md para que humanos y agentes trabajen con las mismas reglas.', trade: 'Más disciplina de documentación a cambio de entregas más rápidas y seguras.' },
+    { y: 'Siguiente', t: 'API-only + frontend separado', d: 'Plan en 3 fases ya definido: controladores delgados → vistas vía fetch → unificar el API.', trade: 'Se descartó una capa intermedia que iba a desaparecer.' },
+  ]}
+  outcomes={[
+    'Estados de cuenta, pagos, reembolsos y descuentos en un solo lugar.',
+    'Tablero de asistencia y <b>alerta temprana de riesgo de deserción</b>.',
+    'Nómina consolidada del instituto: maestros calculada automáticamente + personal administrativo.',
+    'Certificados y diplomas con control de entrega.',
+  ]}
+  quote="“Simplicidad primero: el código mínimo que resuelve el problema. Nada especulativo.” — principio del proyecto"
+  cta="¿Tu empresa tiene un proceso que vive en hojas de cálculo?"
+  subject="Caso IAP"
+/>

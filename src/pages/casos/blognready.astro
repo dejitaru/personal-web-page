@@ -1,0 +1,43 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+---
+<CaseStudy
+  kicker="CASO DE ESTUDIO · 2025 — HOY"
+  title="BlognReady: un CMS ligero para medios que no pueden caerse"
+  lead="Un CMS rápido creado como alternativa a WordPress para portales de noticias. Hoy lo usan 10 clientes y el más grande recibe 15,000 visitas al día. Un solo núcleo, un tema por medio."
+  facts={[
+    { k: 'Rol', v: 'Fundador · producto + desarrollo' },
+    { k: 'Stack', v: 'PHP 8.2 · CodeIgniter 3 · Twig · Vue 3 · MySQL' },
+    { k: 'Alcance', v: '10 clientes · 15k visitas/día' },
+  ]}
+  slides={[
+    { alt: 'Espacio reservado — p. ej. portada de un medio' },
+    { alt: 'Espacio reservado — p. ej. página de nota' },
+    { alt: 'Espacio reservado — p. ej. panel: editar nota' },
+    { alt: 'Espacio reservado — p. ej. panel: listado de noticias' },
+  ]}
+  problem="Los medios digitales pequeños suelen vivir en WordPress: plugins que se rompen con cada actualización, sitios lentos justo cuando una nota se vuelve viral, hosting caro y un panel lleno de opciones que la redacción no usa. <b>Para un medio, cada segundo de carga es audiencia y publicidad perdida.</b>"
+  approach={[
+    { t: 'Hacer menos, pero rápido', d: 'Solo lo que una redacción usa: notas, categorías, portada, banners y publicación en redes. Sin ecosistema de plugins que mantener ni romper.' },
+    { t: 'Núcleo común, un tema por medio', d: 'Cada medio tiene su propio diseño en plantillas <b>Twig</b>, pero todos comparten el mismo código. Un arreglo en el núcleo llega a los 10 clientes a la vez.' },
+    { t: 'Un panel pensado para la redacción', d: 'Editor de notas con foto principal, imágenes organizadas por año/mes, acciones con confirmación y paginación. Lo mínimo para publicar rápido sin errores.' },
+    { t: 'Migrar sin perder tráfico', d: 'Cada migración incluye el SQL de producción y redirecciones de las direcciones viejas, para no perder posicionamiento en buscadores ni enlaces compartidos.' },
+  ]}
+  decisions={[
+    { y: 'Inicio', t: 'No competir con WordPress en features', d: 'Un CMS enfocado en medios de noticias en lugar de una plataforma genérica.', trade: 'Menos flexibilidad a cambio de velocidad, estabilidad y un panel simple.' },
+    { y: 'Diseño', t: 'Temas con Twig', d: 'Plantillas separadas del código: cada medio conserva su identidad sin bifurcar el sistema.', trade: 'Una capa más que aprender, pero cero código duplicado por cliente.' },
+    { y: 'Contenido', t: 'Portada y banners como producto', d: 'Home alternativo con notas destacadas, banners por posición y recorte de imágenes: lo que mueve la publicidad del medio.', trade: 'Se priorizó lo que genera ingresos sobre funciones editoriales avanzadas.' },
+    { y: 'Distribución', t: 'Publicar en Facebook desde el panel', d: 'La nota sale a redes sin cambiar de herramienta, con su configuración por medio.', trade: 'Integración con un tercero a cambio de ahorrarle pasos diarios a la redacción.' },
+    { y: '2026', t: 'Migraciones como proceso repetible', d: 'Cada nuevo medio se suma con su tema, su SQL de producción y sus redirecciones.', trade: 'Más trabajo por migración, pero sin sorpresas el día del cambio.' },
+    { y: 'Siguiente', t: 'De proyectos a producto', d: 'Estandarizar temas y configuración para sumar medios sin desarrollo a la medida.', trade: 'Menos personalización por cliente, más escala.' },
+  ]}
+  outcomes={[
+    '<b>10 medios</b> publicando sobre el mismo núcleo.',
+    'El sitio más grande atiende <b>15,000 visitas diarias</b>.',
+    'Redacciones publicando y compartiendo en redes desde un solo panel.',
+    'Medios migrados desde sistemas anteriores conservando sus direcciones.',
+  ]}
+  quote="“Para un medio, cada segundo de carga es audiencia perdida.”"
+  cta="¿Tu sitio es lento o depende de demasiados plugins?"
+  subject="Caso BlognReady"
+/>

@@ -1,0 +1,61 @@
+---
+// VERSIÓN 3 — Bitácora de decisiones (timeline + trade-offs)
+import Layout from '../../layouts/Layout.astro';
+import Menu from '../../components/Menu.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+const decisions = [
+  { y: '2020', t: 'Lanzar rápido sobre lo conocido', d: 'CodeIgniter 3 + MySQL para tener operando alumnos, grupos y pagos en semanas, no meses.', trade: 'Velocidad hoy vs. deuda técnica mañana — aceptada conscientemente.' },
+  { y: 'Finanzas', t: 'Modelar el dinero como el negocio lo vive', d: 'Estados de cuenta, descuentos recurrentes, reembolsos, fondos y transacciones como capacidades separadas.', trade: 'Más entidades, pero cada regla es auditable y probada.' },
+  { y: 'Académico', t: 'De registrar asistencia a prevenir deserción', d: 'Tablero de asistencia y detección de riesgo: el dato operativo se vuelve alerta de retención.', trade: 'Se priorizó retención sobre nuevos reportes cosméticos.' },
+  { y: 'Arquitectura', t: 'Servicios de dominio, controladores delgados', d: '38 servicios PSR-4 con dependencias por constructor y tests unitarios aislados.', trade: 'Refactor gradual controlador por controlador, sin big-bang.' },
+  { y: '2026', t: 'Spec-driven + agentes de IA', d: 'OpenSpec (47 specs vivas) y AGENTS.md para que humanos y agentes trabajen con las mismas reglas.', trade: 'Más disciplina de documentación a cambio de entregas más rápidas y seguras.' },
+  { y: 'Siguiente', t: 'API-only + frontend separado', d: 'Plan en 3 fases ya definido: controladores delgados → vistas vía fetch → unificar el API.', trade: 'Se descartó una capa intermedia que iba a desaparecer.' },
+];
+---
+<Layout>
+<div class="container"><div class="row">
+<Menu currentPath="/proyectos"/>
+<main><div class="row"><div class="col-1"></div>
+<div class="col-10 col-md-7 content">
+  <p class="kicker">CASO DE ESTUDIO · BITÁCORA DE DECISIONES</p>
+  <h3 class="bold title">6 años, 6 decisiones: IAP Intranet</h3>
+  <p>Un producto no se define por sus features sino por las decisiones que lo moldean. Esta es la historia de la intranet de un instituto educativo contada desde los <b>trade-offs</b> que tomé como dueño de producto y desarrollador.</p>
+  <p class="tags">PHP 8.2 · CodeIgniter 3 · Vue 3 · MySQL · PHPUnit · PHPStan · OpenSpec · Claude Code</p>
+
+  <ol class="timeline">
+    {decisions.map(x => (
+      <li>
+        <span class="y">{x.y}</span>
+        <h5 class="bold">{x.t}</h5>
+        <p>{x.d}</p>
+        <p class="trade"><span>Trade-off</span> {x.trade}</p>
+      </li>
+    ))}
+  </ol>
+
+  <h4 class="bold">Lo que demuestra</h4>
+  <div class="two">
+    <div><h6>Para producto</h6><p>Traduzco operación desordenada en capacidades claras, priorizo por impacto y documento decisiones antes de construir.</p></div>
+    <div><h6>Para ingeniería</h6><p>Mantengo y modernizo un sistema real en producción, con tests, análisis estático y flujos asistidos por IA.</p></div>
+  </div>
+
+  <p class="cta-inline">Si tu producto necesita a alguien entre negocio y código: <a href="mailto:dejitaru@gmail.com?subject=Caso%20IAP">hablemos</a>.</p>
+</div></div></main>
+</div></div>
+<ContactCTA label="Agenda una charla"/>
+</Layout>
+<style>
+.kicker{font-size:.7rem;color:#8795a1;margin-bottom:8px!important}
+.tags{font-size:.75rem!important;color:#8795a1}
+.timeline{list-style:none;padding:0 0 0 24px;border-left:2px solid var(--fg);margin:40px 0}
+.timeline li{position:relative;margin-bottom:36px}
+.timeline li::before{content:'';position:absolute;left:-31px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--fg)}
+.timeline .y{font-size:.7rem;color:#8795a1}
+.timeline h5{font-size:1rem;margin:4px 0 8px}
+.timeline p{margin-bottom:8px!important;font-size:.95rem!important}
+.trade{font-size:.85rem!important;color:var(--muted)}
+.trade span{font-size:.65rem;background:var(--fg);color:var(--surface);padding:2px 6px;border-radius:3px;margin-right:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.two h6{font-size:.75rem;color:#8795a1}
+@media (max-width:768px){.two{grid-template-columns:1fr}}
+</style>

@@ -1,0 +1,169 @@
+---
+/**
+ * Plantilla de caso de estudio (estructura de /casos/iap-v1).
+ * Secciones: encabezado → facts → problema → cómo lo abordé (tarjetas)
+ *            → [galería opcional] → decisiones clave (timeline con trade-off)
+ *            → lo que cambió → cita → recuadro de contacto.
+ * Campos de texto con HTML (problem, approach.d, outcomes) se renderizan con set:html.
+ */
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Menu from './Menu.astro';
+import ContactCTA from './ContactCTA.astro';
+
+interface Props {
+  kicker: string; title: string; lead: string;
+  facts: { k: string; v: string }[];
+  problem: string;
+  approach: { t: string; d: string }[];
+  gallery?: { src: ImageMetadata; alt: string; caption?: string }[];
+  /** Carrusel antes de "El problema". Slide sin src = espacio reservado. */
+  slides?: { src?: ImageMetadata; alt: string; caption?: string }[];
+  decisions: { y: string; t: string; d: string; trade: string }[];
+  outcomes: string[];
+  quote?: string;
+  cta: string; subject: string;
+}
+const p = Astro.props;
+---
+<Layout>
+<div class="container"><div class="row">
+<Menu currentPath="/proyectos"/>
+<main><div class="row"><div class="col-1"></div>
+<div class="col-10 col-md-7 content cs">
+  <p class="kicker">{p.kicker}</p>
+  <h3 class="bold title">{p.title}</h3>
+  <p class="lead">{p.lead}</p>
+
+  <dl class="facts">{p.facts.map(f => <div><dt>{f.k}</dt><dd>{f.v}</dd></div>)}</dl>
+
+  {p.slides && p.slides.length > 0 && (
+    <div class="carousel" data-carousel>
+      <div class="track">
+        {p.slides.map((sl, i) => (
+          <figure class="slide">
+            {sl.src
+              ? <Image src={sl.src} alt={sl.alt} widths={[720, 1440]} sizes="(max-width: 768px) 100vw, 720px" loading={i === 0 ? 'eager' : 'lazy'} />
+              : <div class="ph"><span>Imagen {i + 1}</span><small>{sl.alt}</small></div>}
+            {sl.caption && <figcaption>{sl.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+      <button class="nav prev" aria-label="Anterior">‹</button>
+      <button class="nav next" aria-label="Siguiente">›</button>
+      <div class="dots">{p.slides.map((_, i) => <button aria-label={`Ir a imagen ${i + 1}`} class:list={{ on: i === 0 }} />)}</div>
+    </div>
+  )}
+
+  <h4 class="bold">El problema</h4>
+  <p set:html={p.problem} />
+
+  <h4 class="bold">Cómo lo abordé</h4>
+  <div class="approach">
+    {p.approach.map((a, i) => (
+      <div class="ap">
+        <span class="ap-n">{String(i + 1).padStart(2, '0')}</span>
+        <h5 class="bold">{a.t}</h5>
+        <p set:html={a.d} />
+      </div>
+    ))}
+  </div>
+
+  {p.gallery && p.gallery.length > 0 && (
+    <div class="gallery">
+      {p.gallery.map(g => (
+        <figure>
+          <Image src={g.src} alt={g.alt} widths={[720, 1440]} sizes="(max-width: 768px) 100vw, 720px" />
+          {g.caption && <figcaption>{g.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+  )}
+
+  <h4 class="bold">Decisiones clave</h4>
+  <ol class="timeline">
+    {p.decisions.map(x => (
+      <li>
+        <span class="y">{x.y}</span>
+        <h5 class="bold">{x.t}</h5>
+        <p>{x.d}</p>
+        <p class="trade"><span>Trade-off</span> {x.trade}</p>
+      </li>
+    ))}
+  </ol>
+
+  <h4 class="bold">Lo que cambió</h4>
+  <ul class="outcomes">{p.outcomes.map(o => <li set:html={o} />)}</ul>
+
+  {p.quote && <blockquote>{p.quote}</blockquote>}
+
+  <div class="cta-box">
+    <p class="bold">{p.cta}</p>
+    <a class="btn-cta" href={`mailto:dejitaru@gmail.com?subject=${encodeURIComponent(p.subject)}`}>Escríbeme</a>
+    <a class="btn-ghost" href="https://www.linkedin.com/in/dejitaru/">LinkedIn</a>
+  </div>
+</div></div></main>
+</div></div>
+<ContactCTA/>
+</Layout>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(c => {
+    const track = c.querySelector<HTMLElement>('.track')!;
+    const dots = Array.from(c.querySelectorAll<HTMLButtonElement>('.dots button'));
+    const n = dots.length;
+    const idx = () => Math.round(track.scrollLeft / track.clientWidth);
+    const go = (i: number) => track.scrollTo({ left: ((i + n) % n) * track.clientWidth, behavior: 'smooth' });
+    c.querySelector('.prev')!.addEventListener('click', () => go(idx() - 1));
+    c.querySelector('.next')!.addEventListener('click', () => go(idx() + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    track.addEventListener('scroll', () => dots.forEach((d, i) => d.classList.toggle('on', i === idx())));
+  });
+</script>
+<style>
+.carousel{position:relative;margin:10px 0 30px}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border:1px solid var(--border);border-radius:5px;background:var(--surface)}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;margin:0;padding:4px}
+.slide img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:3px;display:block}
+.ph{aspect-ratio:16/10;border:2px dashed var(--ph);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8795a1;background:var(--surface-2)}
+.ph span{font-weight:700;font-size:.9rem}
+.ph small{font-size:.7rem;margin-top:4px;text-align:center;padding:0 16px}
+.slide figcaption{font-size:.7rem;color:#8795a1;padding:8px 4px 4px}
+.nav{position:absolute;top:calc(50% - 30px);width:36px;height:36px;border-radius:50%;border:1px solid var(--fg);background:var(--surface);font-size:1.2rem;line-height:1;display:flex;align-items:center;justify-content:center}
+.nav.prev{left:-18px}.nav.next{right:-18px}
+.nav:hover{background:var(--fg);color:var(--surface)}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--ph);padding:0}
+.dots button.on{background:var(--fg)}
+@media (max-width:768px){.nav.prev{left:6px}.nav.next{right:6px}}
+.kicker{font-size:.7rem;color:#8795a1;margin-bottom:8px!important}
+.lead{font-size:1.2rem!important;line-height:1.8rem}
+.cs h4{margin-top:40px;margin-bottom:20px;font-size:1.1rem}
+.facts{display:flex;gap:32px;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:30px}
+.facts dt{font-size:.7rem;color:#8795a1;font-weight:400}
+.facts dd{margin:0;font-size:.9rem;font-weight:700}
+.approach{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px}
+.ap{background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:20px;border-top:3px solid var(--fg);transition:transform .2s ease,box-shadow .2s ease}
+.ap:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.ap-n{font-size:1.6rem;font-weight:100;color:#8795a1;display:block;line-height:1}
+.ap h5{font-size:.95rem;margin:10px 0 8px}
+.ap p{margin:0!important;font-size:.88rem!important;line-height:1.4rem}
+.gallery figure{margin:0 0 24px}
+.gallery img{width:100%;height:auto;border:1px solid var(--border);border-radius:5px;padding:4px;background:var(--surface)}
+.gallery figcaption{font-size:.7rem;color:#8795a1;margin-top:6px}
+.timeline{list-style:none;padding:0 0 0 24px;border-left:2px solid var(--fg);margin:20px 0 40px}
+.timeline li{position:relative;margin-bottom:36px}
+.timeline li::before{content:'';position:absolute;left:-31px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--fg)}
+.timeline .y{font-size:.7rem;color:#8795a1}
+.timeline h5{font-size:1rem;margin:4px 0 8px}
+.timeline p{margin-bottom:8px!important;font-size:.95rem!important}
+.trade{font-size:.85rem!important;color:var(--muted)}
+.trade span{font-size:.65rem;background:var(--fg);color:var(--surface);padding:2px 6px;border-radius:3px;margin-right:6px}
+.outcomes li{margin-bottom:10px}
+blockquote{border-left:3px solid var(--fg);padding-left:16px;margin:40px 0;font-weight:300;font-size:1.2rem}
+.cta-box{margin-top:50px;padding:24px;border:1px solid var(--fg);border-radius:5px;background:var(--surface)}
+.btn-cta,.btn-ghost{display:inline-block;padding:8px 18px;border-radius:999px;text-decoration:none;font-size:.8rem;margin-right:8px}
+.btn-cta{background:var(--fg);color:var(--surface)!important}
+.btn-ghost{border:1px solid var(--fg)}
+@media (max-width:768px){.approach{grid-template-columns:1fr}}
+</style>

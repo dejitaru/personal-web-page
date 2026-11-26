@@ -1,0 +1,94 @@
+---
+// VERSIÓN 2 — Dos lentes: el lector elige "Producto" o "Ingeniería"
+import Layout from '../../layouts/Layout.astro';
+import Menu from '../../components/Menu.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+const stats = [
+  ['6', 'años en producción'], ['744', 'commits'], ['47', 'capacidades especificadas'],
+  ['38', 'servicios de dominio'], ['39', 'endpoints/controladores API'], ['51', 'suites de tests'],
+];
+---
+<Layout>
+<div class="container"><div class="row">
+<Menu currentPath="/proyectos"/>
+<main><div class="row"><div class="col-1"></div>
+<div class="col-10 col-md-8 content">
+  <p class="kicker">CASO DE ESTUDIO</p>
+  <h3 class="bold title">IAP Intranet</h3>
+  <p>Plataforma de gestión académica y financiera para un instituto educativo. Alumnos, grupos, asistencias, pagos, certificados y nómina.</p>
+
+  <div class="stats">{stats.map(([n, l]) => <div><span class="n">{n}</span><span class="l">{l}</span></div>)}</div>
+
+  <div class="lens" role="tablist">
+    <span class="lens-label">Ver como:</span>
+    <button class="active" data-lens="pm">Product Manager</button>
+    <button data-lens="dev">Forward Developer</button>
+  </div>
+
+  <section data-panel="pm">
+    <div class="card-row">
+      <div class="c"><h5>Problema</h5><p>Operación en hojas de cálculo: cobranza a ciegas, deserción detectada tarde, nómina incompleta.</p></div>
+      <div class="c"><h5>Apuesta</h5><p>Un solo sistema donde cada rol (admin, académico, recepción, maestro) ve lo que necesita para decidir.</p></div>
+      <div class="c"><h5>Resultado</h5><p>Estados de cuenta, riesgo de asistencia y nómina consolidada disponibles al instante.</p></div>
+    </div>
+    <h5 class="bold">Cómo trabajo producto</h5>
+    <ul>
+      <li><b>Propuesta antes de código:</b> cada cambio documenta <i>por qué</i>, <i>qué cambia</i> e <i>impacto</i> (BD, backend, frontend, permisos).</li>
+      <li><b>Decisiones abiertas explícitas:</b> si el negocio no decidió, se queda en <i>Open Questions</i> y no se implementa.</li>
+      <li><b>Alcance acotado:</b> ej. Nómina IAP — “100% manual por ahora”, el reporte existente no se toca. Entregar valor, iterar después.</li>
+      <li><b>Permisos y bitácora como requisito</b>, no como afterthought.</li>
+    </ul>
+  </section>
+
+  <section data-panel="dev" hidden>
+    <div class="card-row">
+      <div class="c"><h5>Backend</h5><p>PHP 8.2, CodeIgniter 3, servicios PSR-4 con inyección por constructor, Phinx, PHPStan nivel 6.</p></div>
+      <div class="c"><h5>Frontend</h5><p>Componentes Vue 3 embebidos en vistas CI3, migrando a vistas que consumen API.</p></div>
+      <div class="c"><h5>Calidad</h5><p>PHPUnit unitario + funcional (Guzzle contra API), husky, ESLint, specs vivas.</p></div>
+    </div>
+    <h5 class="bold">Decisiones técnicas</h5>
+    <ul>
+      <li><b>Modernización incremental</b> de un legacy en 3 fases hacia API-only, sin congelar la operación.</li>
+      <li><b>Controladores delgados:</b> la lógica vive en servicios testeables, reutilizables por web y API.</li>
+      <li><b>Spec-driven development</b> con OpenSpec: 47 specs describen el comportamiento <i>actual</i> del sistema.</li>
+      <li><b>Repo listo para agentes IA:</b> AGENTS.md, mapa de módulos, guías por capa y documentación por servicio.</li>
+    </ul>
+  </section>
+
+  <div class="cta-box">
+    <p class="bold">¿Buscas a alguien que entienda el negocio y lo pueda construir?</p>
+    <a class="btn-cta" href="mailto:dejitaru@gmail.com?subject=Caso%20IAP">Contáctame</a>
+    <a class="btn-ghost" href="https://www.linkedin.com/in/dejitaru/">LinkedIn</a>
+  </div>
+</div></div></main>
+</div></div>
+<ContactCTA/>
+</Layout>
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.lens button');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.classList.toggle('active', x === b));
+    document.querySelectorAll<HTMLElement>('[data-panel]').forEach(p => p.hidden = p.dataset.panel !== b.dataset.lens);
+  }));
+</script>
+<style>
+.kicker{font-size:.7rem;color:#8795a1;margin-bottom:8px!important}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:10px 0 40px}
+.stats div{background:var(--surface);padding:18px}
+.stats .n{display:block;font-size:1.8rem;font-weight:700}
+.stats .l{font-size:.7rem;color:#8795a1}
+.lens{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+.lens-label{font-size:.75rem;color:#8795a1}
+.lens button{border:1px solid var(--fg);background:var(--surface);padding:6px 14px;font-size:.75rem;letter-spacing:.1em;border-radius:999px}
+.lens button.active{background:var(--fg);color:var(--surface)}
+.card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+.c{border:1px solid var(--border);border-radius:5px;padding:16px;background:var(--surface)}
+.c h5{font-size:.75rem;color:#8795a1}
+.c p{margin:0!important;font-size:.9rem!important}
+section ul li{margin-bottom:10px}
+.cta-box{margin-top:50px;padding:24px;border:1px solid var(--fg);border-radius:5px;background:var(--surface)}
+.btn-cta,.btn-ghost{display:inline-block;padding:8px 18px;border-radius:999px;text-decoration:none;font-size:.8rem;margin-right:8px}
+.btn-cta{background:var(--fg);color:var(--surface)!important}
+.btn-ghost{border:1px solid var(--fg)}
+@media (max-width:768px){.stats,.card-row{grid-template-columns:1fr 1fr}.card-row{grid-template-columns:1fr}}
+</style>

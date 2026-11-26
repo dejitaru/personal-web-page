@@ -1,0 +1,44 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+import mockup from '../../assets/casos/lmsready/lmsready-mockup.png';
+---
+<CaseStudy
+  kicker="CASO DE ESTUDIO · 2020 — HOY"
+  title="LMSReady: capacitación en línea que se conecta con la empresa"
+  lead="Una plataforma de aprendizaje para empresas: los colaboradores toman sus cursos en línea y la empresa obtiene avances, constancias y reportes sin administrar dos veces. Más de 6,000 personas la han usado."
+  facts={[
+    { k: 'Rol', v: 'Fundador · producto + desarrollo' },
+    { k: 'Stack', v: 'PHP · CodeIgniter 3 · MySQL · Vue 3 · Vite' },
+    { k: 'Alcance', v: '+6,000 usuarios · API y webhooks' },
+  ]}
+  slides={[
+    { src: mockup, alt: 'LMSReady en distintos dispositivos', caption: 'Plataforma responsiva: cursos desde cualquier dispositivo.' },
+    { alt: 'Espacio reservado — p. ej. reproductor de curso' },
+    { alt: 'Espacio reservado — p. ej. constancia con código QR' },
+    { alt: 'Espacio reservado — p. ej. reportes del administrador' },
+  ]}
+  problem="En una empresa, la capacitación involucra a <b>recursos humanos, al personal, a sistemas y a los administradores</b>, y cada uno quiere algo distinto. Los LMS tradicionales obligan a crear usuarios a mano, recordar otra contraseña y sacar reportes en Excel: <b>doble administración</b> y cursos que nadie termina."
+  approach={[
+    { t: 'Entrar a un clic', d: 'Con <b>enlaces mágicos</b> basta un correo para entrar, sin contraseñas. Menos fricción, más cursos iniciados y menos tickets a sistemas.' },
+    { t: 'Conectarse, no reemplazar', d: '<b>API y webhooks</b> para sincronizar usuarios y resultados con los sistemas de la empresa y evitar la doble administración.' },
+    { t: 'Constancias que se pueden verificar', d: 'Al aprobar un curso se genera automáticamente una constancia con código de barras y <b>QR</b> para autenticarla.' },
+    { t: 'Adaptarse a cada empresa', d: 'Diseño con la marca del cliente y campos personalizados (área, departamento) para segmentar usuarios y reportes.' },
+  ]}
+  decisions={[
+    { y: 'Inicio', t: 'B2B en lugar de cursos abiertos', d: 'Una plataforma para capacitación interna de empresas, no un marketplace de cursos.', trade: 'Ventas más largas, pero clientes recurrentes y necesidades claras.' },
+    { y: 'Acceso', t: 'Enlaces mágicos sin contraseña', d: 'El correo del colaborador es su llave de entrada.', trade: 'Depender del correo a cambio de eliminar la principal barrera de adopción.' },
+    { y: 'Contenido', t: 'Cursos con cualquier formato', d: 'Videos, archivos, textos, enlaces externos, cuestionarios y tareas con rúbrica, con guardado automático del avance.', trade: 'Más tipos de contenido que soportar, pero cada empresa usa el material que ya tiene.' },
+    { y: 'Integración', t: 'API-first con webhooks', d: 'Documentación pública de la API y bitácoras de API, webhooks y correos para auditar cada integración.', trade: 'Más superficie que mantener a cambio de entrar al flujo de sistemas del cliente.' },
+    { y: 'Experiencia', t: 'Reproductor en Vue 3', d: 'El reproductor de cursos se separó como aplicación Vue 3 + Vite para una experiencia más fluida.', trade: 'Dos frontends conviviendo durante la transición.' },
+    { y: 'Siguiente', t: 'Modernizar la base', d: 'Esquema de base de datos migrado a Phinx y una nueva versión en desarrollo.', trade: 'Invertir en la base antes que en nuevas funciones.' },
+  ]}
+  outcomes={[
+    'Más de <b>6,000 personas</b> capacitadas en la plataforma.',
+    'Acceso sin contraseña y avance guardado automáticamente.',
+    'Constancias automáticas verificables por QR.',
+    'Reportes automatizados e integración con los sistemas del cliente vía API y webhooks.',
+  ]}
+  quote="“Un curso que nadie abre no capacita a nadie: la primera métrica es entrar.”"
+  cta="¿Tu empresa capacita con correos, Excel y PDFs?"
+  subject="Caso LMSReady"
+/>
