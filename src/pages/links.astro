@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Menu from '../components/Menu.astro';
+
+const links = [
+  { name: 'Digital Ocean', url: 'https://m.do.co/c/adf31a6f6d4d' },
+  { name: 'Bitso', url: 'https://bitso.com/register?ref=qskjv' },
+  { name: 'Binance', url: 'https://www.binance.com/en/activity/referral-entry/JLMBX' },
+  { name: 'A2hosting', url: 'http://www.a2hosting.com/refer/152757' },
+  { name: 'Name.com', url: 'https://www.name.com/referral/10bcbd' },
+  { name: 'Fintual', url: 'https://fintual.mx/r/carlosg16f' },
+  { name: 'Amazon Wishlist', url: 'https://www.amazon.com.mx/hz/wishlist/ls/38UI4NPXE228C' },
+];
+const host = (u: string) => new URL(u).hostname.replace(/^www\./, '');
+---
+
+<Layout>
+    <div class="container">
+        <div class="row">
+            <Menu currentPath="/"/>
+            <main>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 col-md-7 content">
+                        <h3 class="bold">Links</h3>
+                        <p>Servicios que uso y recomiendo. Si te registras con mi enlace, ambos podemos recibir un beneficio.</p>
+                        <ul class="links">
+                            {links.map(l => (
+                                <li>
+                                    <a href={l.url} target="_blank" rel="noopener sponsored">
+                                        <span class="name">{l.name}</span>
+                                        <span class="host">{host(l.url)}</span>
+                                        <span class="arrow" aria-hidden="true">↗</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</Layout>
+
+<style>
+.links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.links li{margin:0}
+.links a{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:5px;text-decoration:none;color:var(--fg)!important;font-weight:400!important;transition:transform .15s ease,border-color .15s ease}
+.links a:hover{transform:translateX(4px);border-color:var(--fg)}
+.name{font-weight:700;font-size:.95rem}
+.host{font-size:.75rem;color:#8795a1;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.arrow{font-size:1rem;color:#8795a1;transition:color .15s ease}
+.links a:hover .arrow{color:var(--fg)}
+</style>
